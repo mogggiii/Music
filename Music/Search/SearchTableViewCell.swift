@@ -9,7 +9,7 @@ import UIKit
 
 class SearchTableViewCell: UITableViewCell {
 
-	var track: Track? {
+	var track: SearchViewModel.Cell? {
 		didSet {
 			guard let track = track else { return }
 			artistName.text = track.artistName
@@ -20,6 +20,7 @@ class SearchTableViewCell: UITableViewCell {
 	
 	let trackName: UILabel = {
 		let label = UILabel()
+		label.text = "oo"
 		label.font = .systemFont(ofSize: 17)
 		label.translatesAutoresizingMaskIntoConstraints = false
 		return label
@@ -27,6 +28,7 @@ class SearchTableViewCell: UITableViewCell {
 	
 	let artistName: UILabel = {
 		let label = UILabel()
+		label.text = "oo"
 		label.font = .systemFont(ofSize: 13)
 		label.textColor = .gray
 		label.translatesAutoresizingMaskIntoConstraints = false
@@ -35,6 +37,7 @@ class SearchTableViewCell: UITableViewCell {
 	
 	let collectionName: UILabel = {
 		let label = UILabel()
+		label.text = "oo"
 		label.font = .systemFont(ofSize: 13)
 		label.textColor = .gray
 		label.translatesAutoresizingMaskIntoConstraints = false
