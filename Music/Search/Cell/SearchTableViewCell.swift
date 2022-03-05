@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 protocol TrackCellViewModel {
 	var artistName: String { get }
@@ -69,10 +70,19 @@ class SearchTableViewCell: UITableViewCell {
 		fatalError("init(coder:) has not been implemented")
 	}
 	
+	override func prepareForReuse() {
+		super.prepareForReuse()
+		
+		albumCover.image = nil
+	}
+	
 	func set(viewModel: TrackCellViewModel) {
 		artistName.text = viewModel.artistName
 		trackName.text = viewModel.trackName
 		collectionName.text = viewModel.collectionName ?? ""
+		
+		guard let url = URL(string: viewModel.iconUrlString ?? "") else { return }
+		albumCover.sd_setImage(with: url, completed: nil)
 	}
 	
 	@objc func buttonTapped() {
