@@ -19,7 +19,6 @@
 		CEA6C6FA27CE138F00ADDF27 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CEA6C6F927CE138F00ADDF27 /* Assets.xcassets */; };
 		CEA6C6FD27CE138F00ADDF27 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEA6C6FB27CE138F00ADDF27 /* LaunchScreen.storyboard */; };
 		CEA6C70527CE141A00ADDF27 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA6C70427CE141A00ADDF27 /* MainTabBarController.swift */; };
-		CEA6C70727CE154600ADDF27 /* SearchMusicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA6C70627CE154500ADDF27 /* SearchMusicViewController.swift */; };
 		CEA6C70927CE15B100ADDF27 /* LibraryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA6C70827CE15B100ADDF27 /* LibraryViewController.swift */; };
 		CEA6C70B27CE1CC900ADDF27 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA6C70A27CE1CC900ADDF27 /* Constant.swift */; };
 		CEA6C70D27CE250300ADDF27 /* SearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA6C70C27CE250200ADDF27 /* SearchTableViewCell.swift */; };
@@ -43,7 +42,6 @@
 		CEA6C6FC27CE138F00ADDF27 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CEA6C6FE27CE138F00ADDF27 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CEA6C70427CE141A00ADDF27 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
-		CEA6C70627CE154500ADDF27 /* SearchMusicViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchMusicViewController.swift; sourceTree = "<group>"; };
 		CEA6C70827CE15B100ADDF27 /* LibraryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryViewController.swift; sourceTree = "<group>"; };
 		CEA6C70A27CE1CC900ADDF27 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
 		CEA6C70C27CE250200ADDF27 /* SearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableViewCell.swift; sourceTree = "<group>"; };
@@ -84,13 +82,13 @@
 		CE70A4AB27CF829C0068E28E /* Search */ = {
 			isa = PBXGroup;
 			children = (
+				CEFB676627D396300009F372 /* Cell */,
 				CE70A4C127CF83BF0068E28E /* SearchInteractor.swift */,
 				CE70A4BC27CF83BF0068E28E /* SearchPresenter.swift */,
+				CE70A4CA27D0E3220068E28E /* SearchViewController.swift */,
 				CE70A4BD27CF83BF0068E28E /* SearchWorker.swift */,
 				CE70A4BE27CF83BF0068E28E /* SearchRouter.swift */,
 				CE70A4BF27CF83BF0068E28E /* SearchModels.swift */,
-				CEA6C70C27CE250200ADDF27 /* SearchTableViewCell.swift */,
-				CE70A4CA27D0E3220068E28E /* SearchViewController.swift */,
 			);
 			path = Search;
 			sourceTree = "<group>";
@@ -98,6 +96,7 @@
 		CE70A4BB27CF833C0068E28E /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				CECA37DC27D38F410067C58D /* Models */,
 				CEF88EED27CE82580010D0A5 /* NetworkManager.swift */,
 			);
 			path = Services;
@@ -132,12 +131,26 @@
 				CEA6C6FB27CE138F00ADDF27 /* LaunchScreen.storyboard */,
 				CEA6C6FE27CE138F00ADDF27 /* Info.plist */,
 				CEA6C70427CE141A00ADDF27 /* MainTabBarController.swift */,
-				CEA6C70627CE154500ADDF27 /* SearchMusicViewController.swift */,
 				CEA6C70827CE15B100ADDF27 /* LibraryViewController.swift */,
 				CEA6C70A27CE1CC900ADDF27 /* Constant.swift */,
-				CEF88EEB27CE7BD90010D0A5 /* SearchResponse.swift */,
 			);
 			path = Music;
+			sourceTree = "<group>";
+		};
+		CECA37DC27D38F410067C58D /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				CEF88EEB27CE7BD90010D0A5 /* SearchResponse.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		CEFB676627D396300009F372 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				CEA6C70C27CE250200ADDF27 /* SearchTableViewCell.swift */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -264,7 +277,6 @@
 				CE70A4C627CF83BF0068E28E /* SearchModels.swift in Sources */,
 				CEA6C70527CE141A00ADDF27 /* MainTabBarController.swift in Sources */,
 				CE70A4C827CF83BF0068E28E /* SearchInteractor.swift in Sources */,
-				CEA6C70727CE154600ADDF27 /* SearchMusicViewController.swift in Sources */,
 				CEA6C6F327CE138800ADDF27 /* SceneDelegate.swift in Sources */,
 				CE70A4C427CF83BF0068E28E /* SearchWorker.swift in Sources */,
 				CEA6C70B27CE1CC900ADDF27 /* Constant.swift in Sources */,

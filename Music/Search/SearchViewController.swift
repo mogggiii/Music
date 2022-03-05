@@ -21,6 +21,9 @@ class SearchViewController: UITableViewController, SearchDisplayLogic {
 	private var trackViewModel = SearchViewModel.init(cell: [])
 	private var timer: Timer?
 	
+	static let reuseId = "cellId"
+
+	
 	// MARK: Object lifecycle
 	
 	
@@ -72,7 +75,7 @@ class SearchViewController: UITableViewController, SearchDisplayLogic {
 	}
 	
 	private func setupTableView() {
-		tableView.register(SearchTableViewCell.self, forCellReuseIdentifier: "cellId")
+		tableView.register(SearchTableViewCell.self, forCellReuseIdentifier: SearchViewController.reuseId)
 	}
 	
 	
@@ -81,10 +84,15 @@ class SearchViewController: UITableViewController, SearchDisplayLogic {
 		return trackViewModel.cell.count
 	}
 	
+	override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+		return 84
+	}
+	
 	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		let cell = tableView.dequeueReusableCell(withIdentifier: "cellId", for: indexPath) as! SearchTableViewCell
+		let cell = tableView.dequeueReusableCell(withIdentifier: SearchViewController.reuseId, for: indexPath) as! SearchTableViewCell
 		let cellViewModel = trackViewModel.cell[indexPath.row]
-		cell.track = cellViewModel
+		print("preview Url: ", cellViewModel.previewUrl ?? "")
+		cell.set(viewModel: cellViewModel)
 		return cell
 	}
 	

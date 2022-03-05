@@ -20,7 +20,7 @@ enum Search {
     struct Response {
       enum ResponseType {
         case some
-				case presentTracks(searchResponse: [Track]?)
+				case presentTracks(searchResponse: SearchResponse?)
       }
     }
     struct ViewModel {
@@ -33,11 +33,12 @@ enum Search {
 }
 
 struct SearchViewModel {
-	struct Cell {
+	struct Cell: TrackCellViewModel {
 		var iconUrlString: String?
 		var trackName: String
 		var collectionName: String?
 		var artistName: String
+		var previewUrl: String? 
 	}
 	
 	let cell: [Cell]
