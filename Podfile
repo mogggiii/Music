@@ -6,7 +6,6 @@ target 'Music' do
   use_frameworks!
 
   # Pods for Music
-  pod 'Alamofire'
   pod 'SDWebImage'
-
+  pod 'Alamofire', '~> 5.5'
 end

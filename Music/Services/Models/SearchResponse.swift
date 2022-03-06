@@ -8,7 +8,7 @@
 import Foundation
 
 struct SearchResponse: Decodable {
-	var resultsCount: Int?
+	var resultCount: Int
 	var results: [Track]
 }
 

@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol SearchDisplayLogic: class {
+protocol SearchDisplayLogic: AnyObject {
 	func displayData(viewModel: Search.Model.ViewModel.ViewModelData)
 }
 
@@ -20,9 +20,9 @@ class SearchViewController: UITableViewController, SearchDisplayLogic {
 	let searchController = UISearchController(searchResultsController: nil)
 	private var trackViewModel = SearchViewModel.init(cell: [])
 	private var timer: Timer?
+	private lazy var footerView = FooterView()
 	
 	static let reuseId = "cellId"
-
 	
 	// MARK: Object lifecycle
 	
@@ -53,29 +53,29 @@ class SearchViewController: UITableViewController, SearchDisplayLogic {
 		
 		setupSearchBar()
 		setupTableView()
-		
 	}
 	
 	func displayData(viewModel: Search.Model.ViewModel.ViewModelData) {
 		switch viewModel {
-		case .some:
-			print("VC .some")
+		case .displayFooterView:
+			footerView.showLoader()
 		case .displayTracks(let trackViewModel):
-			print("presenter .presentTracks")
 			self.trackViewModel = trackViewModel
 			tableView.reloadData()
+			footerView.hideLoader()
 		}
 	}
 	
 	private func setupSearchBar() {
 		navigationItem.searchController = searchController
 		navigationItem.hidesSearchBarWhenScrolling = false
-		searchController.searchBar.delegate = self
 		searchController.obscuresBackgroundDuringPresentation = false
+		searchController.searchBar.delegate = self
 	}
 	
 	private func setupTableView() {
 		tableView.register(SearchTableViewCell.self, forCellReuseIdentifier: SearchViewController.reuseId)
+		tableView.tableFooterView = footerView
 	}
 	
 	
@@ -91,9 +91,21 @@ class SearchViewController: UITableViewController, SearchDisplayLogic {
 	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cell = tableView.dequeueReusableCell(withIdentifier: SearchViewController.reuseId, for: indexPath) as! SearchTableViewCell
 		let cellViewModel = trackViewModel.cell[indexPath.row]
-		print("preview Url: ", cellViewModel.previewUrl ?? "")
 		cell.set(viewModel: cellViewModel)
+		
 		return cell
+	}
+	
+	override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+		return trackViewModel.cell.count > 0 ? 0 : 250
+	}
+	
+	override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+		let label = UILabel()
+		label.text = "Please enter search term above..."
+		label.textAlignment = .center
+		label.font = .systemFont(ofSize: 18, weight: .semibold)
+		return label
 	}
 	
 }
@@ -101,11 +113,10 @@ class SearchViewController: UITableViewController, SearchDisplayLogic {
 // MARK: - Search Bar Delegate
 extension SearchViewController: UISearchBarDelegate {
 	func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-		print(searchText)
 		
 		timer?.invalidate()
-		timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false, block: { _ in
-			self.interactor?.makeRequest(request: Search.Model.Request.RequestType.getTracks(searchText: searchText))
+		timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false, block: { (_) in
+			self.interactor?.makeRequest(request: .getTracks(searchTerm: searchText))
 		})
 	}
 	

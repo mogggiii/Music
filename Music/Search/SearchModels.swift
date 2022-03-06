@@ -13,20 +13,19 @@ enum Search {
   enum Model {
     struct Request {
       enum RequestType {
-        case some
-				case getTracks(searchText: String)
+				case getTracks(searchTerm: String)
       }
     }
     struct Response {
       enum ResponseType {
-        case some
 				case presentTracks(searchResponse: SearchResponse?)
+				case presentFooterView
       }
     }
     struct ViewModel {
       enum ViewModelData {
-        case some
 				case displayTracks(trackViewModel: SearchViewModel)
+				case displayFooterView
       }
     }
   }
@@ -41,6 +40,6 @@ struct SearchViewModel {
 		var previewUrl: String? 
 	}
 	
-	let cell: [Cell]
+	var cell: [Cell]
 }
 

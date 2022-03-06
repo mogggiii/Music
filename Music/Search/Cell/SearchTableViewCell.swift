@@ -17,36 +17,32 @@ protocol TrackCellViewModel {
 
 class SearchTableViewCell: UITableViewCell {
 	
-	let trackName: UILabel = {
+	var trackName: UILabel = {
 		let label = UILabel()
-		label.text = "oo"
 		label.font = .systemFont(ofSize: 17)
 		label.font = .systemFont(ofSize: 17, weight: .medium)
 		label.translatesAutoresizingMaskIntoConstraints = false
 		return label
 	}()
 	
-	let artistName: UILabel = {
+	var artistName: UILabel = {
 		let label = UILabel()
-		label.text = "oo"
 		label.font = .systemFont(ofSize: 13, weight: .medium)
 		label.textColor = UIColor(red: 184 / 255, green: 184 / 255, blue: 186 / 255, alpha: 1.0)
 		label.translatesAutoresizingMaskIntoConstraints = false
 		return label
 	}()
 	
-	let collectionName: UILabel = {
+	var collectionName: UILabel = {
 		let label = UILabel()
-		label.text = "oo"
 		label.font = .systemFont(ofSize: 13)
 		label.textColor = .gray
 		label.translatesAutoresizingMaskIntoConstraints = false
 		return label
 	}()
 	
-	let albumCover: UIImageView = {
+	var albumCover: UIImageView = {
 		let cover = UIImageView()
-		cover.image = UIImage(named: "cover")
 		cover.layer.cornerRadius = 7
 		cover.clipsToBounds = true
 		cover.translatesAutoresizingMaskIntoConstraints = false
@@ -64,16 +60,11 @@ class SearchTableViewCell: UITableViewCell {
 	override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
 		super.init(style: style, reuseIdentifier: reuseIdentifier)
 		configureCell()
+		albumCover.image = nil
 	}
 	
 	required init?(coder: NSCoder) {
 		fatalError("init(coder:) has not been implemented")
-	}
-	
-	override func prepareForReuse() {
-		super.prepareForReuse()
-		
-		albumCover.image = nil
 	}
 	
 	func set(viewModel: TrackCellViewModel) {
