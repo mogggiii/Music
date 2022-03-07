@@ -67,6 +67,7 @@ class SearchTableViewCell: UITableViewCell {
 		fatalError("init(coder:) has not been implemented")
 	}
 	
+	// MARK: - Set Cell via ViewModel 
 	func set(viewModel: TrackCellViewModel) {
 		artistName.text = viewModel.artistName
 		trackName.text = viewModel.trackName
@@ -80,6 +81,7 @@ class SearchTableViewCell: UITableViewCell {
 		print("ADD")
 	}
 	
+	// MARK: - Configure Cell
 	fileprivate func configureCell() {
 		
 		contentView.addSubview(artistName)
@@ -113,7 +115,6 @@ class SearchTableViewCell: UITableViewCell {
 			addButton.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 34),
 			addButton.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -34),
 			addButton.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -24)
-			
 			
 		])
 	}

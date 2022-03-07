@@ -133,10 +133,7 @@
 			children = (
 				CE70A4AB27CF829C0068E28E /* Search */,
 				CE70A4BB27CF833C0068E28E /* Services */,
-				CEA6C6F227CE138800ADDF27 /* SceneDelegate.swift */,
-				CEA6C6F027CE138800ADDF27 /* AppDelegate.swift */,
-				CEA6C6F927CE138F00ADDF27 /* Assets.xcassets */,
-				CEA6C6FB27CE138F00ADDF27 /* LaunchScreen.storyboard */,
+				CED61C7327D61522006155F3 /* SupportingFiles */,
 				CEA6C6FE27CE138F00ADDF27 /* Info.plist */,
 				CEA6C70427CE141A00ADDF27 /* MainTabBarController.swift */,
 				CEA6C70827CE15B100ADDF27 /* LibraryViewController.swift */,
@@ -151,6 +148,17 @@
 				CEF88EEB27CE7BD90010D0A5 /* SearchResponse.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		CED61C7327D61522006155F3 /* SupportingFiles */ = {
+			isa = PBXGroup;
+			children = (
+				CEA6C6F227CE138800ADDF27 /* SceneDelegate.swift */,
+				CEA6C6F027CE138800ADDF27 /* AppDelegate.swift */,
+				CEA6C6F927CE138F00ADDF27 /* Assets.xcassets */,
+				CEA6C6FB27CE138F00ADDF27 /* LaunchScreen.storyboard */,
+			);
+			path = SupportingFiles;
 			sourceTree = "<group>";
 		};
 		CEE5366127D4EB3100D94088 /* TrackDetailView */ = {

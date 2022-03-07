@@ -98,10 +98,10 @@ class SearchViewController: UITableViewController, SearchDisplayLogic {
 	
 	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		let cellViewModel = trackViewModel.cell[indexPath.row]
-		print(cellViewModel.trackName)
 		
 		let window = UIApplication.shared.keyWindow
 		let trackDetailsView = Bundle.main.loadNibNamed("TrackDetailView", owner: self, options: nil)?.first as! TrackDetailView
+		trackDetailsView.set(viewModel: cellViewModel)
 		window?.addSubview(trackDetailsView)
 	}
 	
