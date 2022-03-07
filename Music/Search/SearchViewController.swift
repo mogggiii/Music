@@ -96,6 +96,15 @@ class SearchViewController: UITableViewController, SearchDisplayLogic {
 		return cell
 	}
 	
+	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+		let cellViewModel = trackViewModel.cell[indexPath.row]
+		print(cellViewModel.trackName)
+		
+		let window = UIApplication.shared.keyWindow
+		let trackDetailsView = Bundle.main.loadNibNamed("TrackDetailView", owner: self, options: nil)?.first as! TrackDetailView
+		window?.addSubview(trackDetailsView)
+	}
+	
 	override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
 		return trackViewModel.cell.count > 0 ? 0 : 250
 	}

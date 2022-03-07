@@ -22,6 +22,8 @@
 		CEA6C70927CE15B100ADDF27 /* LibraryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA6C70827CE15B100ADDF27 /* LibraryViewController.swift */; };
 		CEA6C70B27CE1CC900ADDF27 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA6C70A27CE1CC900ADDF27 /* Constant.swift */; };
 		CEA6C70D27CE250300ADDF27 /* SearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA6C70C27CE250200ADDF27 /* SearchTableViewCell.swift */; };
+		CEE5366327D4EB9700D94088 /* TrackDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE5366227D4EB9600D94088 /* TrackDetailView.swift */; };
+		CEE5366927D4F26900D94088 /* TrackDetailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEE5366827D4F26900D94088 /* TrackDetailView.xib */; };
 		CEF88EEC27CE7BD90010D0A5 /* SearchResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF88EEB27CE7BD90010D0A5 /* SearchResponse.swift */; };
 		CEF88EEE27CE82580010D0A5 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF88EED27CE82580010D0A5 /* NetworkManager.swift */; };
 		CEFB676927D3AA9C0009F372 /* FooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFB676827D3AA9C0009F372 /* FooterView.swift */; };
@@ -46,6 +48,8 @@
 		CEA6C70827CE15B100ADDF27 /* LibraryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryViewController.swift; sourceTree = "<group>"; };
 		CEA6C70A27CE1CC900ADDF27 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
 		CEA6C70C27CE250200ADDF27 /* SearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableViewCell.swift; sourceTree = "<group>"; };
+		CEE5366227D4EB9600D94088 /* TrackDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackDetailView.swift; sourceTree = "<group>"; };
+		CEE5366827D4F26900D94088 /* TrackDetailView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TrackDetailView.xib; sourceTree = "<group>"; };
 		CEF88EEB27CE7BD90010D0A5 /* SearchResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResponse.swift; sourceTree = "<group>"; };
 		CEF88EED27CE82580010D0A5 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		CEFB676827D3AA9C0009F372 /* FooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FooterView.swift; sourceTree = "<group>"; };
@@ -84,6 +88,7 @@
 		CE70A4AB27CF829C0068E28E /* Search */ = {
 			isa = PBXGroup;
 			children = (
+				CEE5366127D4EB3100D94088 /* TrackDetailView */,
 				CEFB676727D3AA750009F372 /* FooterView */,
 				CEFB676627D396300009F372 /* Cell */,
 				CE70A4C127CF83BF0068E28E /* SearchInteractor.swift */,
@@ -146,6 +151,15 @@
 				CEF88EEB27CE7BD90010D0A5 /* SearchResponse.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		CEE5366127D4EB3100D94088 /* TrackDetailView */ = {
+			isa = PBXGroup;
+			children = (
+				CEE5366227D4EB9600D94088 /* TrackDetailView.swift */,
+				CEE5366827D4F26900D94088 /* TrackDetailView.xib */,
+			);
+			path = TrackDetailView;
 			sourceTree = "<group>";
 		};
 		CEFB676627D396300009F372 /* Cell */ = {
@@ -225,6 +239,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CEA6C6FD27CE138F00ADDF27 /* LaunchScreen.storyboard in Resources */,
+				CEE5366927D4F26900D94088 /* TrackDetailView.xib in Resources */,
 				CEA6C6FA27CE138F00ADDF27 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -281,6 +296,7 @@
 				CE70A4CB27D0E3220068E28E /* SearchViewController.swift in Sources */,
 				CE70A4C527CF83BF0068E28E /* SearchRouter.swift in Sources */,
 				CEF88EEE27CE82580010D0A5 /* NetworkManager.swift in Sources */,
+				CEE5366327D4EB9700D94088 /* TrackDetailView.swift in Sources */,
 				CEFB676927D3AA9C0009F372 /* FooterView.swift in Sources */,
 				CEA6C6F127CE138800ADDF27 /* AppDelegate.swift in Sources */,
 				CE70A4C327CF83BF0068E28E /* SearchPresenter.swift in Sources */,
