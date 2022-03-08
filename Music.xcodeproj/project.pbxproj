@@ -24,6 +24,7 @@
 		CEA6C70D27CE250300ADDF27 /* SearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA6C70C27CE250200ADDF27 /* SearchTableViewCell.swift */; };
 		CEE5366327D4EB9700D94088 /* TrackDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE5366227D4EB9600D94088 /* TrackDetailView.swift */; };
 		CEE5366927D4F26900D94088 /* TrackDetailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEE5366827D4F26900D94088 /* TrackDetailView.xib */; };
+		CEED2DF827D7512A0060B096 /* CMTime + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEED2DF727D7512A0060B096 /* CMTime + Extension.swift */; };
 		CEF88EEC27CE7BD90010D0A5 /* SearchResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF88EEB27CE7BD90010D0A5 /* SearchResponse.swift */; };
 		CEF88EEE27CE82580010D0A5 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF88EED27CE82580010D0A5 /* NetworkManager.swift */; };
 		CEFB676927D3AA9C0009F372 /* FooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFB676827D3AA9C0009F372 /* FooterView.swift */; };
@@ -50,6 +51,7 @@
 		CEA6C70C27CE250200ADDF27 /* SearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableViewCell.swift; sourceTree = "<group>"; };
 		CEE5366227D4EB9600D94088 /* TrackDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackDetailView.swift; sourceTree = "<group>"; };
 		CEE5366827D4F26900D94088 /* TrackDetailView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TrackDetailView.xib; sourceTree = "<group>"; };
+		CEED2DF727D7512A0060B096 /* CMTime + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CMTime + Extension.swift"; sourceTree = "<group>"; };
 		CEF88EEB27CE7BD90010D0A5 /* SearchResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResponse.swift; sourceTree = "<group>"; };
 		CEF88EED27CE82580010D0A5 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		CEFB676827D3AA9C0009F372 /* FooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FooterView.swift; sourceTree = "<group>"; };
@@ -134,6 +136,7 @@
 				CE70A4AB27CF829C0068E28E /* Search */,
 				CE70A4BB27CF833C0068E28E /* Services */,
 				CED61C7327D61522006155F3 /* SupportingFiles */,
+				CEED2DF627D751020060B096 /* Helpers */,
 				CEA6C6FE27CE138F00ADDF27 /* Info.plist */,
 				CEA6C70427CE141A00ADDF27 /* MainTabBarController.swift */,
 				CEA6C70827CE15B100ADDF27 /* LibraryViewController.swift */,
@@ -168,6 +171,14 @@
 				CEE5366827D4F26900D94088 /* TrackDetailView.xib */,
 			);
 			path = TrackDetailView;
+			sourceTree = "<group>";
+		};
+		CEED2DF627D751020060B096 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				CEED2DF727D7512A0060B096 /* CMTime + Extension.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 		CEFB676627D396300009F372 /* Cell */ = {
@@ -312,6 +323,7 @@
 				CEA6C70927CE15B100ADDF27 /* LibraryViewController.swift in Sources */,
 				CE70A4C627CF83BF0068E28E /* SearchModels.swift in Sources */,
 				CEA6C70527CE141A00ADDF27 /* MainTabBarController.swift in Sources */,
+				CEED2DF827D7512A0060B096 /* CMTime + Extension.swift in Sources */,
 				CE70A4C827CF83BF0068E28E /* SearchInteractor.swift in Sources */,
 				CEA6C6F327CE138800ADDF27 /* SceneDelegate.swift in Sources */,
 				CE70A4C427CF83BF0068E28E /* SearchWorker.swift in Sources */,

@@ -33,7 +33,7 @@ class TrackDetailView: UIView {
 		
 		let scale: CGFloat = 0.8
 		trackImageView.transform = CGAffineTransform(scaleX: scale, y: scale)
-		trackImageView.layer.cornerRadius = 5
+		trackImageView.layer.cornerRadius = 6
 	}
 	
 	// MARK: - Setup
@@ -49,6 +49,7 @@ class TrackDetailView: UIView {
 		playTrack(previewUrl: viewModel.previewUrl)
 		
 		monitorStartTime()
+		observePlayerCurrentTime()
 	}
 	
 	// MARK: - Private Methods
@@ -90,6 +91,18 @@ class TrackDetailView: UIView {
 		let times = [NSValue(time: time)]
 		player.addBoundaryTimeObserver(forTimes: times, queue: .main) { [weak self] in
 			self?.enlargeTrackImageView()
+		}
+	}
+	
+	private func observePlayerCurrentTime() {
+		let interval = CMTimeMake(value: 1, timescale: 2)
+		player.addPeriodicTimeObserver(forInterval: interval, queue: .main) { [weak self] time in
+			self?.currentTimeLabel.text = time.toDisplayString()
+			
+			// Duration playing track time
+			let durationTime = self?.player.currentItem?.duration
+			let currentDurationTimeText = ((durationTime ?? CMTimeMake(value: 1, timescale: 1)) - time).toDisplayString()
+			self?.durationLabel.text = "-\(currentDurationTimeText)"
 		}
 	}
 	
