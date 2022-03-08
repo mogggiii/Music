@@ -34,6 +34,8 @@ class TrackDetailView: UIView {
 		let scale: CGFloat = 0.8
 		trackImageView.transform = CGAffineTransform(scaleX: scale, y: scale)
 		trackImageView.layer.cornerRadius = 6
+		
+		currentTimeSlider.setThumbImage(UIImage(named: "knob2"), for: .normal)
 	}
 	
 	// MARK: - Setup
@@ -103,7 +105,15 @@ class TrackDetailView: UIView {
 			let durationTime = self?.player.currentItem?.duration
 			let currentDurationTimeText = ((durationTime ?? CMTimeMake(value: 1, timescale: 1)) - time).toDisplayString()
 			self?.durationLabel.text = "-\(currentDurationTimeText)"
+			self?.updateCurrentTimeSlider()
 		}
+	}
+	
+	private func updateCurrentTimeSlider() {
+		let currentTimeSeconds = CMTimeGetSeconds(player.currentTime())
+		let durationSeconds = CMTimeGetSeconds(player.currentItem?.duration ?? CMTimeMake(value: 1, timescale: 1))
+		let percentage = currentTimeSeconds / durationSeconds
+		self.currentTimeSlider.value = Float(percentage)
 	}
 	
 	// MARK: - IBActions
@@ -111,10 +121,21 @@ class TrackDetailView: UIView {
 		self.removeFromSuperview()
 	}
 	
+	// Player Slider
 	@IBAction func handleCurrentTimeSlider(_ sender: Any) {
+		guard let duration = player.currentItem?.duration else { return }
+		
+		let percentage = currentTimeSlider.value
+		let durationInSeconds = CMTimeGetSeconds(duration)
+		let seekTimeInSeconds = Float64(percentage) * durationInSeconds
+		let seekTime = CMTimeMakeWithSeconds(seekTimeInSeconds, preferredTimescale: 1)
+		
+		player.seek(to: seekTime)
 	}
 	
+	// Volume slider
 	@IBAction func handleVolumeSlider(_ sender: Any) {
+		player.volume = volumeSlider.value
 	}
 	
 	@IBAction func previousTrack(_ sender: Any) {

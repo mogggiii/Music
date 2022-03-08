@@ -39,6 +39,7 @@
                             <subviews>
                                 <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="cLE-AM-f3d">
                                     <rect key="frame" x="-2" y="0.0" width="319" height="31"/>
+                                    <color key="minimumTrackTintColor" red="0.93725490199999995" green="0.16862745100000001" blue="0.3803921569" alpha="1" colorSpace="calibratedRGB"/>
                                     <connections>
                                         <action selector="handleCurrentTimeSlider:" destination="bwr-VX-k2n" eventType="valueChanged" id="hVZ-ez-oK2"/>
                                     </connections>
@@ -72,8 +73,8 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Author" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cWa-GR-fFG">
-                                    <rect key="frame" x="123.5" y="29" width="68.5" height="29"/>
-                                    <fontDescription key="fontDescription" type="system" weight="light" pointSize="24"/>
+                                    <rect key="frame" x="122.5" y="29" width="70" height="29"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                     <color key="textColor" red="0.93725490196078431" green="0.16862745098039217" blue="0.38039215686274508" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
@@ -120,6 +121,7 @@
                                 </imageView>
                                 <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="A2x-jo-CvD">
                                     <rect key="frame" x="25" y="0.0" width="265" height="18"/>
+                                    <color key="minimumTrackTintColor" red="0.59215686274509804" green="0.58823529411764708" blue="0.60784313725490191" alpha="1" colorSpace="calibratedRGB"/>
                                     <connections>
                                         <action selector="handleVolumeSlider:" destination="bwr-VX-k2n" eventType="valueChanged" id="eQ3-zJ-PGg"/>
                                     </connections>
