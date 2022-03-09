@@ -102,6 +102,7 @@ class SearchViewController: UITableViewController, SearchDisplayLogic {
 		let window = UIApplication.shared.keyWindow
 		let trackDetailsView = Bundle.main.loadNibNamed("TrackDetailView", owner: self, options: nil)?.first as! TrackDetailView
 		trackDetailsView.set(viewModel: cellViewModel)
+		trackDetailsView.delegate = self
 		window?.addSubview(trackDetailsView)
 	}
 	
@@ -121,6 +122,7 @@ class SearchViewController: UITableViewController, SearchDisplayLogic {
 
 // MARK: - Search Bar Delegate
 extension SearchViewController: UISearchBarDelegate {
+	
 	func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
 		
 		timer?.invalidate()
@@ -128,6 +130,46 @@ extension SearchViewController: UISearchBarDelegate {
 			self.interactor?.makeRequest(request: .getTracks(searchTerm: searchText))
 		})
 	}
+	
+}
+
+// MARK: TrackMovingDelegate
+extension SearchViewController: TrackMovingDelegate {
+	
+	private func getTrack(isForwardTrack: Bool) -> SearchViewModel.Cell? {
+		guard let indexPath = tableView.indexPathForSelectedRow else { return nil }
+		tableView.deselectRow(at: indexPath, animated: true)
+		
+		var nextIndexPath: IndexPath!
+		
+		if isForwardTrack {
+			nextIndexPath = IndexPath(row: indexPath.row + 1, section: indexPath.section)
+			if nextIndexPath.row == trackViewModel.cell.count {
+				nextIndexPath.row = 0
+			}
+		} else {
+			nextIndexPath = IndexPath(row: indexPath.row - 1, section: indexPath.section)
+			if nextIndexPath.row == -1 {
+				nextIndexPath.row = trackViewModel.cell.count - 1
+			}
+		}
+		
+		tableView.selectRow(at: nextIndexPath, animated: true, scrollPosition: .none)
+		let cellViewModel = trackViewModel.cell[nextIndexPath.row]
+		print(cellViewModel.trackName)
+		return cellViewModel
+	}
+	
+	func moveBackForPreviousTrack() -> SearchViewModel.Cell? {
+		print("Go Back")
+		return getTrack(isForwardTrack: false)
+	}
+	
+	func moveForwardForNextTrack() -> SearchViewModel.Cell? {
+		print("Go Forward")
+		return getTrack(isForwardTrack: true)
+	}
+	
 	
 }
 

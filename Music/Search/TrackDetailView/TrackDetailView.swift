@@ -8,6 +8,10 @@
 import UIKit
 import AVKit
 
+protocol TrackMovingDelegate: class {
+	func moveBackForPreviousTrack() -> SearchViewModel.Cell?
+	func moveForwardForNextTrack() -> SearchViewModel.Cell?
+}
 
 class TrackDetailView: UIView {
 	
@@ -26,6 +30,8 @@ class TrackDetailView: UIView {
 		avPlayer.automaticallyWaitsToMinimizeStalling = false
 		return avPlayer
 	}()
+	
+	weak var delegate: TrackMovingDelegate?
 	
 	// MARK: - awakeFromNib
 	override func awakeFromNib() {
@@ -49,7 +55,6 @@ class TrackDetailView: UIView {
 		trackImageView.sd_setImage(with: url, completed: nil)
 		
 		playTrack(previewUrl: viewModel.previewUrl)
-		
 		monitorStartTime()
 		observePlayerCurrentTime()
 	}
@@ -139,9 +144,15 @@ class TrackDetailView: UIView {
 	}
 	
 	@IBAction func previousTrack(_ sender: Any) {
+		let cellViewModel = delegate?.moveBackForPreviousTrack()
+		guard let cellInfo = cellViewModel else { return }
+		self.set(viewModel: cellInfo)
 	}
 	
 	@IBAction func nextTrack(_ sender: Any) {
+		let cellViewModel = delegate?.moveForwardForNextTrack()
+		guard let cellInfo = cellViewModel else { return }
+		self.set(viewModel: cellInfo)
 	}
 	
 	// Play Pause actiions
