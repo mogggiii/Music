@@ -14,8 +14,8 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="6es-xE-w26">
-                    <rect key="frame" x="30" y="0.0" width="315" height="637"/>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="6es-xE-w26">
+                    <rect key="frame" x="30" y="0.0" width="315" height="607"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tEM-of-uEW">
                             <rect key="frame" x="0.0" y="0.0" width="315" height="44"/>
@@ -29,13 +29,14 @@
                             </connections>
                         </button>
                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="kgd-f6-y8a">
-                            <rect key="frame" x="0.0" y="54" width="315" height="315"/>
+                            <rect key="frame" x="0.0" y="46" width="315" height="315"/>
+                            <color key="backgroundColor" red="0.93725490199999995" green="0.16862745100000001" blue="0.3803921569" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
                                 <constraint firstAttribute="width" secondItem="kgd-f6-y8a" secondAttribute="height" multiplier="1:1" id="rtu-mB-b2z"/>
                             </constraints>
                         </imageView>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="NZh-HC-p2a">
-                            <rect key="frame" x="0.0" y="379" width="315" height="48"/>
+                            <rect key="frame" x="0.0" y="363" width="315" height="48"/>
                             <subviews>
                                 <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="cLE-AM-f3d">
                                     <rect key="frame" x="-2" y="0.0" width="319" height="31"/>
@@ -64,7 +65,7 @@
                             </subviews>
                         </stackView>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="xfn-z8-x2l">
-                            <rect key="frame" x="0.0" y="437" width="315" height="58"/>
+                            <rect key="frame" x="0.0" y="413" width="315" height="58"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Track Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MNB-QP-9XC">
                                     <rect key="frame" x="101.5" y="0.0" width="112.5" height="29"/>
@@ -81,10 +82,10 @@
                             </subviews>
                         </stackView>
                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="4gl-xo-pAK">
-                            <rect key="frame" x="0.0" y="505" width="315" height="105"/>
+                            <rect key="frame" x="0.0" y="473" width="315" height="115"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YYK-KI-FaF">
-                                    <rect key="frame" x="0.0" y="35.5" width="105" height="34"/>
+                                    <rect key="frame" x="0.0" y="40.5" width="105" height="34"/>
                                     <state key="normal" title="Button"/>
                                     <buttonConfiguration key="configuration" style="plain" image="backTrack"/>
                                     <connections>
@@ -92,7 +93,7 @@
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SLW-LR-EIc">
-                                    <rect key="frame" x="105" y="27.5" width="105" height="50"/>
+                                    <rect key="frame" x="105" y="32.5" width="105" height="50"/>
                                     <state key="normal" title="Button"/>
                                     <buttonConfiguration key="configuration" style="plain" image="pause"/>
                                     <connections>
@@ -100,7 +101,7 @@
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Tz-6C-e30">
-                                    <rect key="frame" x="210" y="35.5" width="105" height="34"/>
+                                    <rect key="frame" x="210" y="40.5" width="105" height="34"/>
                                     <state key="normal" title="Button"/>
                                     <buttonConfiguration key="configuration" style="plain" image="fastForward"/>
                                     <connections>
@@ -110,7 +111,7 @@
                             </subviews>
                         </stackView>
                         <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="DHv-cB-vIf">
-                            <rect key="frame" x="0.0" y="620" width="315" height="17"/>
+                            <rect key="frame" x="0.0" y="590" width="315" height="17"/>
                             <subviews>
                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iconMin" translatesAutoresizingMaskIntoConstraints="NO" id="Svc-Nm-d4D">
                                     <rect key="frame" x="0.0" y="0.0" width="17" height="17"/>
@@ -143,7 +144,7 @@
             <constraints>
                 <constraint firstItem="6es-xE-w26" firstAttribute="top" secondItem="904-UT-60B" secondAttribute="top" id="EmE-Ku-fwf"/>
                 <constraint firstItem="904-UT-60B" firstAttribute="trailing" secondItem="6es-xE-w26" secondAttribute="trailing" constant="30" id="Mek-GA-QoX"/>
-                <constraint firstItem="904-UT-60B" firstAttribute="bottom" secondItem="6es-xE-w26" secondAttribute="bottom" constant="30" id="OFW-pk-IAl"/>
+                <constraint firstItem="904-UT-60B" firstAttribute="bottom" relation="lessThanOrEqual" secondItem="6es-xE-w26" secondAttribute="bottom" constant="60" id="OFW-pk-IAl"/>
                 <constraint firstItem="6es-xE-w26" firstAttribute="leading" secondItem="904-UT-60B" secondAttribute="leading" constant="30" id="sOh-fW-eur"/>
             </constraints>
             <connections>
@@ -156,7 +157,7 @@
                 <outlet property="trackTitleLabel" destination="MNB-QP-9XC" id="Byd-Wj-61Q"/>
                 <outlet property="volumeSlider" destination="A2x-jo-CvD" id="YTA-Bx-k1P"/>
             </connections>
-            <point key="canvasLocation" x="725" y="15"/>
+            <point key="canvasLocation" x="724" y="14.842578710644679"/>
         </view>
     </objects>
     <resources>

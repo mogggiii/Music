@@ -100,7 +100,7 @@ class SearchViewController: UITableViewController, SearchDisplayLogic {
 		let cellViewModel = trackViewModel.cell[indexPath.row]
 		
 		let window = UIApplication.shared.keyWindow
-		let trackDetailsView = Bundle.main.loadNibNamed("TrackDetailView", owner: self, options: nil)?.first as! TrackDetailView
+		let trackDetailsView: TrackDetailView = TrackDetailView.loadFromNib()
 		trackDetailsView.set(viewModel: cellViewModel)
 		trackDetailsView.delegate = self
 		window?.addSubview(trackDetailsView)
@@ -156,17 +156,14 @@ extension SearchViewController: TrackMovingDelegate {
 		
 		tableView.selectRow(at: nextIndexPath, animated: true, scrollPosition: .none)
 		let cellViewModel = trackViewModel.cell[nextIndexPath.row]
-		print(cellViewModel.trackName)
 		return cellViewModel
 	}
 	
 	func moveBackForPreviousTrack() -> SearchViewModel.Cell? {
-		print("Go Back")
 		return getTrack(isForwardTrack: false)
 	}
 	
 	func moveForwardForNextTrack() -> SearchViewModel.Cell? {
-		print("Go Forward")
 		return getTrack(isForwardTrack: true)
 	}
 	
