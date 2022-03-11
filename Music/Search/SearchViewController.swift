@@ -21,6 +21,7 @@ class SearchViewController: UITableViewController, SearchDisplayLogic {
 	private var trackViewModel = SearchViewModel.init(cell: [])
 	private var timer: Timer?
 	private lazy var footerView = FooterView()
+	static var tabBarDelegate: MainTabBarControllerDelegate?
 	
 	static let reuseId = "cellId"
 	
@@ -50,6 +51,8 @@ class SearchViewController: UITableViewController, SearchDisplayLogic {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		setup()
+		
+		TrackDetailView.delegate = self
 		
 		setupSearchBar()
 		setupTableView()
@@ -99,11 +102,7 @@ class SearchViewController: UITableViewController, SearchDisplayLogic {
 	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		let cellViewModel = trackViewModel.cell[indexPath.row]
 		
-		let window = UIApplication.shared.keyWindow
-		let trackDetailsView: TrackDetailView = TrackDetailView.loadFromNib()
-		trackDetailsView.set(viewModel: cellViewModel)
-		trackDetailsView.delegate = self
-		window?.addSubview(trackDetailsView)
+		SearchViewController.tabBarDelegate?.maximaizeTrackDetailController(viewModel: cellViewModel)
 	}
 	
 	override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {

@@ -31,8 +31,8 @@ class TrackDetailView: UIView {
 		return avPlayer
 	}()
 	
-	weak var delegate: TrackMovingDelegate?
-	weak var tabBarDelegate: MainTabBarControllerDelegate?
+	static var delegate: TrackMovingDelegate?
+	static var tabBarDelegate: MainTabBarControllerDelegate?
 	
 	// MARK: - awakeFromNib
 	override func awakeFromNib() {
@@ -124,7 +124,7 @@ class TrackDetailView: UIView {
 	
 	// MARK: - IBActions
 	@IBAction func dragDownButtonTapped(_ sender: Any) {
-		self.tabBarDelegate?.minimaizeTrackDetailController()
+		TrackDetailView.tabBarDelegate?.minimaizeTrackDetailController()
 //		self.removeFromSuperview()
 	}
 	
@@ -146,13 +146,13 @@ class TrackDetailView: UIView {
 	}
 	
 	@IBAction func previousTrack(_ sender: Any) {
-		let cellViewModel = delegate?.moveBackForPreviousTrack()
+		let cellViewModel = TrackDetailView.delegate?.moveBackForPreviousTrack()
 		guard let cellInfo = cellViewModel else { return }
 		self.set(viewModel: cellInfo)
 	}
 	
 	@IBAction func nextTrack(_ sender: Any) {
-		let cellViewModel = delegate?.moveForwardForNextTrack()
+		let cellViewModel = TrackDetailView.delegate?.moveForwardForNextTrack()
 		guard let cellInfo = cellViewModel else { return }
 		self.set(viewModel: cellInfo)
 	}
