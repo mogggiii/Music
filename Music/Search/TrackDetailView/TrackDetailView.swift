@@ -32,7 +32,7 @@ class TrackDetailView: UIView {
 	}()
 	
 	static var delegate: TrackMovingDelegate?
-	static var tabBarDelegate: MainTabBarControllerDelegate?
+	weak var tabBarDelegate: MainTabBarControllerDelegate?
 	
 	// MARK: - awakeFromNib
 	override func awakeFromNib() {
@@ -124,7 +124,7 @@ class TrackDetailView: UIView {
 	
 	// MARK: - IBActions
 	@IBAction func dragDownButtonTapped(_ sender: Any) {
-		TrackDetailView.tabBarDelegate?.minimaizeTrackDetailController()
+		self.tabBarDelegate?.minimaizeTrackDetailController()
 //		self.removeFromSuperview()
 	}
 	

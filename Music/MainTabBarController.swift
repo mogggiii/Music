@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import SnapKit
 
 protocol MainTabBarControllerDelegate: class {
 	func minimaizeTrackDetailController()
@@ -19,14 +18,12 @@ class MainTabBarController: UITabBarController {
 	private var maximaizedTopAnchorConstraint: NSLayoutConstraint!
 	private var bottomAnchorConstraint: NSLayoutConstraint!
 	let trackDetailView: TrackDetailView = TrackDetailView.loadFromNib()
-	let searchVC: SearchViewController = SearchViewController()
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
 		tabBar.tintColor = Constant.Colors.tintColor
-		
-		
+
 		viewControllers = [
 			createNavigationController(
 				viewController: SearchViewController(),
@@ -58,33 +55,28 @@ class MainTabBarController: UITabBarController {
 		return navigationController
 	}
 	
-	private func setupTrackDetailView() {
-		print("KEKEKEKEKEK")
-		view.insertSubview(trackDetailView, belowSubview: tabBar)
-		TrackDetailView.tabBarDelegate = self
-		trackDetailView.backgroundColor = .green
+	fileprivate func setupTrackDetailView() {
 		
-		//		use autho layout
+		trackDetailView.tabBarDelegate = self
+		trackDetailView.translatesAutoresizingMaskIntoConstraints = false
+		view.insertSubview(trackDetailView, belowSubview: tabBar)
+		
+		// use autho layout
 		maximaizedTopAnchorConstraint = trackDetailView.topAnchor.constraint(equalTo: view.topAnchor, constant: view.frame.height)
-		maximaizedTopAnchorConstraint = trackDetailView.topAnchor.constraint(equalTo: tabBar.topAnchor, constant: -64)
+		minimaizedTopAnchorConstraint = trackDetailView.topAnchor.constraint(equalTo: tabBar.topAnchor, constant: -64)
 		bottomAnchorConstraint = trackDetailView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: view.frame.height)
 		
 		bottomAnchorConstraint.isActive = true
 		maximaizedTopAnchorConstraint.isActive = true
 		
-		trackDetailView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
 		trackDetailView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+		trackDetailView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
 	}
 	
 }
 
 extension MainTabBarController: MainTabBarControllerDelegate {
 	func maximaizeTrackDetailController(viewModel: SearchViewModel.Cell?) {
-		
-		//		trackDetailView.snp.updateConstraints { make in
-		//			make.top.equalToSuperview()
-		//			make.bottom.equalToSuperview()
-		//		}
 		
 		maximaizedTopAnchorConstraint.isActive = true
 		minimaizedTopAnchorConstraint.isActive = false
@@ -107,10 +99,6 @@ extension MainTabBarController: MainTabBarControllerDelegate {
 	
 	func minimaizeTrackDetailController() {
 		
-		//		trackDetailView.snp.remakeConstraints { make in
-		//			make.top.equalTo(tabBar.snp.top).offset(64)
-		//			make.bottom.equalToSuperview().inset(view.frame.height)
-		//		}
 		maximaizedTopAnchorConstraint.isActive = false
 		bottomAnchorConstraint.constant = view.frame.height
 		minimaizedTopAnchorConstraint.isActive = true
