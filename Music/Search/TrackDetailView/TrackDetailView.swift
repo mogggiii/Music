@@ -49,6 +49,9 @@ class TrackDetailView: UIView {
 		trackImageView.transform = CGAffineTransform(scaleX: scale, y: scale)
 		trackImageView.layer.cornerRadius = 6
 		
+		miniPlayerPlayButton.tintColor = .black
+		playPauseButton.tintColor = .black
+		
 		currentTimeSlider.setThumbImage(UIImage(named: "knob2"), for: .normal)
 	}
 	
@@ -68,8 +71,8 @@ class TrackDetailView: UIView {
 		authorTitleLabel.text = viewModel.artistName
 		trackImageView.sd_setImage(with: url, completed: nil)
 		miniTrackImageView.sd_setImage(with: url60, completed: nil)
-		playPauseButton.setImage(UIImage(named: "pause"), for: .normal)
-		miniPlayerPlayButton.setImage(UIImage(named: "pause"), for: .normal)
+		playPauseButton.setImage(UIImage(systemName: "pause.fill"), for: .normal)
+		miniPlayerPlayButton.setImage(UIImage(systemName: "pause.fill"), for: .normal)
 		
 		playTrack(previewUrl: viewModel.previewUrl)
 		monitorStartTime()
@@ -177,13 +180,13 @@ class TrackDetailView: UIView {
 	@IBAction func playPauseAction(_ sender: Any) {
 		if player.timeControlStatus == .paused {
 			player.play()
-			playPauseButton.setImage(UIImage(named: "pause"), for: .normal)
-			miniPlayerPlayButton.setImage(UIImage(named: "pause"), for: .normal)
+			playPauseButton.setImage(UIImage(systemName: "pause.fill"), for: .normal)
+			miniPlayerPlayButton.setImage(UIImage(systemName: "pause.fill"), for: .normal)
 			enlargeTrackImageView()
 		} else {
 			player.pause()
-			playPauseButton.setImage(UIImage(named: "play"), for: .normal)
-			miniPlayerPlayButton.setImage(UIImage(named: "play"), for: .normal)
+			playPauseButton.setImage(UIImage(systemName: "play.fill"), for: .normal)
+			miniPlayerPlayButton.setImage(UIImage(systemName: "play.fill"), for: .normal)
 			reduceTrackImageView()
 		}
 	}

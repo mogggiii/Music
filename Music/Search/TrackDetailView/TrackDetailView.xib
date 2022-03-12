@@ -3,6 +3,7 @@
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -39,13 +40,16 @@
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jo9-1L-O6Y">
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jo9-1L-O6Y">
                                     <rect key="frame" x="247" y="0.0" width="48" height="48"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="48" id="zXV-sy-nQ1"/>
                                     </constraints>
                                     <state key="normal" title="Button"/>
-                                    <buttonConfiguration key="configuration" style="plain" image="pause"/>
+                                    <buttonConfiguration key="configuration" style="plain" imagePadding="0.0">
+                                        <imageReference key="image" image="play.fill" catalog="system" symbolScale="large"/>
+                                        <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" configurationType="pointSize" pointSize="25" scale="large"/>
+                                    </buttonConfiguration>
                                     <connections>
                                         <action selector="playPauseAction:" destination="bwr-VX-k2n" eventType="touchUpInside" id="odx-L1-YSA"/>
                                     </connections>
@@ -154,9 +158,11 @@
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SLW-LR-EIc">
-                                    <rect key="frame" x="105" y="32.5" width="105" height="50"/>
+                                    <rect key="frame" x="105" y="29.5" width="105" height="56"/>
                                     <state key="normal" title="Button"/>
-                                    <buttonConfiguration key="configuration" style="plain" image="pause"/>
+                                    <buttonConfiguration key="configuration" style="plain" image="pause.fill" catalog="system">
+                                        <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" configurationType="pointSize" pointSize="35"/>
+                                    </buttonConfiguration>
                                     <connections>
                                         <action selector="playPauseAction:" destination="bwr-VX-k2n" eventType="touchUpInside" id="UtX-cE-uiU"/>
                                     </connections>
@@ -237,7 +243,8 @@
         <image name="fastForward" width="34" height="20"/>
         <image name="iconMax" width="17" height="17"/>
         <image name="iconMin" width="7" height="12"/>
-        <image name="pause" width="28" height="36"/>
+        <image name="pause.fill" catalog="system" width="116" height="128"/>
+        <image name="play.fill" catalog="system" width="116" height="128"/>
         <systemColor name="opaqueSeparatorColor">
             <color red="0.77647058823529413" green="0.77647058823529413" blue="0.78431372549019607" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
