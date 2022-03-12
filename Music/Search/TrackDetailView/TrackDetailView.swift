@@ -16,6 +16,13 @@ protocol TrackMovingDelegate: class {
 class TrackDetailView: UIView {
 	
 	// MARK: - IBOutlets
+	@IBOutlet weak var miniPlayerView: UIView!
+	@IBOutlet weak var miniGoForwardButton: UIButton!
+	@IBOutlet weak var miniTrackImageView: UIImageView!
+	@IBOutlet weak var miniTrackTitleLabel: UILabel!
+	@IBOutlet weak var miniPlayerPlayButton: UIButton!
+	
+	@IBOutlet weak var maximaizedStackView: UIStackView!
 	@IBOutlet weak var trackImageView: UIImageView!
 	@IBOutlet weak var currentTimeSlider: UISlider!
 	@IBOutlet weak var currentTimeLabel: UILabel!
@@ -49,11 +56,20 @@ class TrackDetailView: UIView {
 	func set(viewModel: SearchViewModel.Cell) {
 		
 		let string600 = viewModel.iconUrlString?.replacingOccurrences(of: "100x100", with: "600x600")
-		guard let url = URL(string: string600 ?? "") else { return }
+		let string60 = viewModel.iconUrlString?.replacingOccurrences(of: "100x100", with: "60x60")
 		
+		guard
+			let url = URL(string: string600 ?? ""),
+			let url60 = URL(string: string60 ?? "")
+		else { return }
+		
+		miniTrackTitleLabel.text = viewModel.trackName
 		trackTitleLabel.text = viewModel.trackName
 		authorTitleLabel.text = viewModel.artistName
 		trackImageView.sd_setImage(with: url, completed: nil)
+		miniTrackImageView.sd_setImage(with: url60, completed: nil)
+		playPauseButton.setImage(UIImage(named: "pause"), for: .normal)
+		miniPlayerPlayButton.setImage(UIImage(named: "pause"), for: .normal)
 		
 		playTrack(previewUrl: viewModel.previewUrl)
 		monitorStartTime()
@@ -162,10 +178,12 @@ class TrackDetailView: UIView {
 		if player.timeControlStatus == .paused {
 			player.play()
 			playPauseButton.setImage(UIImage(named: "pause"), for: .normal)
+			miniPlayerPlayButton.setImage(UIImage(named: "pause"), for: .normal)
 			enlargeTrackImageView()
 		} else {
 			player.pause()
 			playPauseButton.setImage(UIImage(named: "play"), for: .normal)
+			miniPlayerPlayButton.setImage(UIImage(named: "play"), for: .normal)
 			reduceTrackImageView()
 		}
 	}
