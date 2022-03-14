@@ -90,13 +90,14 @@ class TrackDetailView: UIView {
 		player.play()
 	}
 	
-	// MARK: - Animations
+	// Gestures func
 	private func setupGestures() {
 		miniPlayerView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTapMaximaized)))
-		
 		miniPlayerView.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(handlePan)))
+		addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(handleDismissPan)))
 	}
 	
+	// MARK: - Animations
 	private func enlargeTrackImageView() {
 		UIView.animate(withDuration: 1.0,
 									 delay: 0,
@@ -163,7 +164,7 @@ class TrackDetailView: UIView {
 		case .ended:
 			handlePanEnded(gesture: gesture)
 		@unknown default:
-			print("Default")
+			break
 		}
 	}
 	
@@ -196,10 +197,33 @@ class TrackDetailView: UIView {
 		}, completion: nil)
 	}
 	
+	@objc private func handleDismissPan(gesture: UIPanGestureRecognizer) {
+		switch gesture.state {
+		case .changed:
+			let translation = gesture.translation(in: self.superview)
+			maximaizedStackView.transform = CGAffineTransform(translationX: 0, y: translation.y)
+		case .ended:
+			let translation = gesture.translation(in: self.superview)
+			UIView.animate(withDuration: 0.5,
+										 delay: 0,
+										 usingSpringWithDamping: 0.7,
+										 initialSpringVelocity: 1.0,
+										 options: .curveEaseOut,
+										 animations: {
+				self.maximaizedStackView.transform = .identity
+				if translation.y > 50 {
+					self.tabBarDelegate?.minimaizeTrackDetailController()
+				}
+			}, completion: nil)
+		@unknown default:
+			print("Default")
+		}
+	}
+	
 	// MARK: - IBActions
 	@IBAction func dragDownButtonTapped(_ sender: Any) {
 		self.tabBarDelegate?.minimaizeTrackDetailController()
-//		self.removeFromSuperview()
+		//		self.removeFromSuperview()
 	}
 	
 	// Player Slider

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SwiftUI
 
 protocol MainTabBarControllerDelegate: class {
 	func minimaizeTrackDetailController()
@@ -23,24 +24,27 @@ class MainTabBarController: UITabBarController {
 		super.viewDidLoad()
 		
 		tabBar.tintColor = Constant.Colors.tintColor
-
+		
+		let library = Library()
+		let hostVC = UIHostingController(rootView: library)
+		hostVC.tabBarItem.image = UIImage(named: "library")
+		hostVC.tabBarItem.title = "Library"
+		
 		viewControllers = [
 			createNavigationController(
 				viewController: SearchViewController(),
 				title: "Search",
 				image: "search",
 				backgroundColor: .systemBackground),
-			createNavigationController(
-				viewController: LibraryViewController(),
-				title: "Library",
-				image: "library",
-				backgroundColor: .systemBackground)]
+			hostVC
+		]
 		
 		SearchViewController.tabBarDelegate = self
 		
 		setupTrackDetailView()
 	}
 	
+	// MARK: - Fileprivate func
 	fileprivate func createNavigationController(viewController: UIViewController,
 																							title: String, image: String,
 																							backgroundColor: UIColor) -> UIViewController {
@@ -75,11 +79,12 @@ class MainTabBarController: UITabBarController {
 	
 }
 
+// MARK: MainTabBarControllerDelegate
 extension MainTabBarController: MainTabBarControllerDelegate {
 	func maximaizeTrackDetailController(viewModel: SearchViewModel.Cell?) {
 		
-		maximaizedTopAnchorConstraint.isActive = true
 		minimaizedTopAnchorConstraint.isActive = false
+		maximaizedTopAnchorConstraint.isActive = true
 		maximaizedTopAnchorConstraint.constant = 0
 		bottomAnchorConstraint.constant = 0
 		
