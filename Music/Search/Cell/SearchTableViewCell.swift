@@ -8,14 +8,17 @@
 import UIKit
 import SDWebImage
 
-protocol TrackCellViewModel {
-	var artistName: String { get }
-	var trackName: String { get }
-	var collectionName: String? { get }
-	var iconUrlString: String? { get }
-}
+// MARK: - TrackCellViewModel
+//protocol TrackCellViewModel {
+//	var artistName: String { get }
+//	var trackName: String { get }
+//	var collectionName: String? { get }
+//	var iconUrlString: String? { get }
+//}
 
 class SearchTableViewCell: UITableViewCell {
+	
+	var cell: SearchViewModel.Cell?
 	
 	var trackName: UILabel = {
 		let label = UILabel()
@@ -52,7 +55,16 @@ class SearchTableViewCell: UITableViewCell {
 	let addButton: UIButton = {
 		let button = UIButton()
 		button.setImage(UIImage(named: "add"), for: .normal)
-		button.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
+		button.addTarget(self, action: #selector(addTrackAction), for: .touchUpInside)
+		button.translatesAutoresizingMaskIntoConstraints = false
+		return button
+	}()
+	
+	let test: UIButton = {
+		let button = UIButton()
+		button.setTitle("Show", for: .normal)
+		button.tintColor = .red
+		button.addTarget(self, action: #selector(fff), for: .touchUpInside)
 		button.translatesAutoresizingMaskIntoConstraints = false
 		return button
 	}()
@@ -68,7 +80,8 @@ class SearchTableViewCell: UITableViewCell {
 	}
 	
 	// MARK: - Set Cell via ViewModel 
-	func set(viewModel: TrackCellViewModel) {
+	func set(viewModel: SearchViewModel.Cell) {
+		self.cell = viewModel
 		artistName.text = viewModel.artistName
 		trackName.text = viewModel.trackName
 		collectionName.text = viewModel.collectionName ?? ""
@@ -77,8 +90,22 @@ class SearchTableViewCell: UITableViewCell {
 		albumCover.sd_setImage(with: url, completed: nil)
 	}
 	
-	@objc func buttonTapped() {
-		print("ADD")
+	// MARK: - Save track (User Defaults)
+	@objc func addTrackAction() {
+		let defaults = UserDefaults.standard
+		if let savedData = try? NSKeyedArchiver.archivedData(withRootObject: cell, requiringSecureCoding: false) {
+			print("Succes")
+			defaults.set(savedData, forKey: "tracks")
+		}
+	}
+	
+	@objc func fff() {
+		let defaults = UserDefaults.standard
+		if let savedTrack = defaults.object(forKey: "tracks") as? Data {
+			if let decodedTrack = try? NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(savedTrack) as? SearchViewModel.Cell {
+				print(decodedTrack.trackName)
+			}
+		}
 	}
 	
 	// MARK: - Configure Cell
@@ -89,6 +116,7 @@ class SearchTableViewCell: UITableViewCell {
 		contentView.addSubview(collectionName)
 		contentView.addSubview(albumCover)
 		contentView.addSubview(addButton)
+		contentView.addSubview(test)
 		
 		NSLayoutConstraint.activate([
 			
@@ -110,11 +138,14 @@ class SearchTableViewCell: UITableViewCell {
 			collectionName.leadingAnchor.constraint(equalTo: albumCover.trailingAnchor, constant: 9),
 			collectionName.trailingAnchor.constraint(equalTo: addButton.leadingAnchor, constant: -14),
 			
-			addButton.heightAnchor.constraint(equalToConstant: 16),
-			addButton.widthAnchor.constraint(equalToConstant: 16),
+			addButton.heightAnchor.constraint(equalToConstant: 20),
+			addButton.widthAnchor.constraint(equalToConstant: 20),
 			addButton.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 34),
 			addButton.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -34),
-			addButton.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -24)
+			addButton.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -24),
+			
+			test.centerXAnchor.constraint(equalTo: self.contentView.centerXAnchor),
+			test.centerYAnchor.constraint(equalTo: self.contentView.centerYAnchor)
 			
 		])
 	}

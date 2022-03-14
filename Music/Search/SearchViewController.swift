@@ -18,7 +18,7 @@ class SearchViewController: UITableViewController, SearchDisplayLogic {
 	var router: (NSObjectProtocol & SearchRoutingLogic)?
 	
 	let searchController = UISearchController(searchResultsController: nil)
-	private var trackViewModel = SearchViewModel.init(cell: [])
+	private var trackViewModel = SearchViewModel.init(cells: [])
 	private var timer: Timer?
 	private lazy var footerView = FooterView()
 	static var tabBarDelegate: MainTabBarControllerDelegate?
@@ -84,7 +84,7 @@ class SearchViewController: UITableViewController, SearchDisplayLogic {
 	
 	// MARK: - Table View Data Source
 	override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return trackViewModel.cell.count
+		return trackViewModel.cells.count
 	}
 	
 	override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -93,20 +93,20 @@ class SearchViewController: UITableViewController, SearchDisplayLogic {
 	
 	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cell = tableView.dequeueReusableCell(withIdentifier: SearchViewController.reuseId, for: indexPath) as! SearchTableViewCell
-		let cellViewModel = trackViewModel.cell[indexPath.row]
+		let cellViewModel = trackViewModel.cells[indexPath.row]
 		cell.set(viewModel: cellViewModel)
 		
 		return cell
 	}
 	
 	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-		let cellViewModel = trackViewModel.cell[indexPath.row]
+		let cellViewModel = trackViewModel.cells[indexPath.row]
 		
 		SearchViewController.tabBarDelegate?.maximaizeTrackDetailController(viewModel: cellViewModel)
 	}
 	
 	override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-		return trackViewModel.cell.count > 0 ? 0 : 250
+		return trackViewModel.cells.count > 0 ? 0 : 250
 	}
 	
 	override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -143,18 +143,18 @@ extension SearchViewController: TrackMovingDelegate {
 		
 		if isForwardTrack {
 			nextIndexPath = IndexPath(row: indexPath.row + 1, section: indexPath.section)
-			if nextIndexPath.row == trackViewModel.cell.count {
+			if nextIndexPath.row == trackViewModel.cells.count {
 				nextIndexPath.row = 0
 			}
 		} else {
 			nextIndexPath = IndexPath(row: indexPath.row - 1, section: indexPath.section)
 			if nextIndexPath.row == -1 {
-				nextIndexPath.row = trackViewModel.cell.count - 1
+				nextIndexPath.row = trackViewModel.cells.count - 1
 			}
 		}
 		
 		tableView.selectRow(at: nextIndexPath, animated: true, scrollPosition: .none)
-		let cellViewModel = trackViewModel.cell[nextIndexPath.row]
+		let cellViewModel = trackViewModel.cells[nextIndexPath.row]
 		return cellViewModel
 	}
 	
