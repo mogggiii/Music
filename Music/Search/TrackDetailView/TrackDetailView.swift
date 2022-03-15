@@ -8,7 +8,7 @@
 import UIKit
 import AVKit
 
-protocol TrackMovingDelegate: class {
+protocol TrackMovingDelegate {
 	func moveBackForPreviousTrack() -> SearchViewModel.Cell?
 	func moveForwardForNextTrack() -> SearchViewModel.Cell?
 }
@@ -38,7 +38,7 @@ class TrackDetailView: UIView {
 		return avPlayer
 	}()
 	
-	static var delegate: TrackMovingDelegate?
+	var delegate: TrackMovingDelegate?
 	weak var tabBarDelegate: MainTabBarControllerDelegate?
 	
 	// MARK: - awakeFromNib
@@ -244,13 +244,13 @@ class TrackDetailView: UIView {
 	}
 	
 	@IBAction func previousTrack(_ sender: Any) {
-		let cellViewModel = TrackDetailView.delegate?.moveBackForPreviousTrack()
+		let cellViewModel = self.delegate?.moveBackForPreviousTrack()
 		guard let cellInfo = cellViewModel else { return }
 		self.set(viewModel: cellInfo)
 	}
 	
 	@IBAction func nextTrack(_ sender: Any) {
-		let cellViewModel = TrackDetailView.delegate?.moveForwardForNextTrack()
+		let cellViewModel = self.delegate?.moveForwardForNextTrack()
 		guard let cellInfo = cellViewModel else { return }
 		self.set(viewModel: cellInfo)
 	}

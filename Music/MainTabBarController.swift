@@ -19,6 +19,7 @@ class MainTabBarController: UITabBarController {
 	private var maximaizedTopAnchorConstraint: NSLayoutConstraint!
 	private var bottomAnchorConstraint: NSLayoutConstraint!
 	let trackDetailView: TrackDetailView = TrackDetailView.loadFromNib()
+	var searchVC = SearchViewController()
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -32,7 +33,7 @@ class MainTabBarController: UITabBarController {
 		
 		viewControllers = [
 			createNavigationController(
-				viewController: SearchViewController(),
+				viewController: searchVC,
 				title: "Search",
 				image: "search",
 				backgroundColor: .systemBackground),
@@ -63,6 +64,7 @@ class MainTabBarController: UITabBarController {
 	fileprivate func setupTrackDetailView() {
 		
 		trackDetailView.tabBarDelegate = self
+		trackDetailView.delegate = searchVC
 		trackDetailView.translatesAutoresizingMaskIntoConstraints = false
 		view.insertSubview(trackDetailView, belowSubview: tabBar)
 		

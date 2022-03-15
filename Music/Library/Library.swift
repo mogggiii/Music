@@ -54,6 +54,16 @@ struct Library: View {
 									self.showingAlert = true
 								}
 								.simultaneously(with: TapGesture().onEnded { _ in
+									
+									let keyWindow = UIApplication.shared.connectedScenes
+										.filter ({$0.activationState == .foregroundActive})
+										.map ({$0 as? UIWindowScene})
+										.compactMap ({$0})
+										.first?.windows
+										.filter({$0.isKeyWindow}).first
+									let tabBarVC = keyWindow?.rootViewController as? MainTabBarController
+									tabBarVC?.trackDetailView.delegate = self
+									
 									self.track = track
 									Library.tabBarDelegate?.maximaizeTrackDetailController(viewModel: self.track)
 								}))
@@ -97,3 +107,38 @@ struct Library_Previews: PreviewProvider {
 		Library()
 	}
 }
+
+extension Library: TrackMovingDelegate {
+	func moveBackForPreviousTrack() -> SearchViewModel.Cell? {
+		let index = tracks.firstIndex(of: track)
+		guard let index = index else { return nil }
+		var previosTrack: SearchViewModel.Cell
+		
+		if index - 1 == -1 {
+			previosTrack = tracks[tracks.count - 1]
+		} else {
+			previosTrack = tracks[index - 1]
+		}
+		
+		self.track = previosTrack
+		return previosTrack
+	}
+	
+	func moveForwardForNextTrack() -> SearchViewModel.Cell? {
+		let index = tracks.firstIndex(of: track)
+		guard let index = index else { return nil }
+		var nextTrack: SearchViewModel.Cell
+		
+		if index + 1 == tracks.count {
+			nextTrack = tracks[0]
+		} else {
+			nextTrack = tracks[index + 1]
+		}
+		
+		self.track = nextTrack
+		return nextTrack
+	}
+	
+	
+}
+

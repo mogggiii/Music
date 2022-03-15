@@ -22,6 +22,8 @@ class SearchViewController: UITableViewController, SearchDisplayLogic {
 	private var timer: Timer?
 	private lazy var footerView = FooterView()
 	static var tabBarDelegate: MainTabBarControllerDelegate?
+	var trackDetailVC: TrackDetailView = TrackDetailView.loadFromNib()
+	
 	
 	static let reuseId = "cellId"
 	
@@ -52,13 +54,24 @@ class SearchViewController: UITableViewController, SearchDisplayLogic {
 		super.viewDidLoad()
 		setup()
 		
-		TrackDetailView.delegate = self
-		
 		setupSearchBar()
 		setupTableView()
 		
 		tableView.keyboardDismissMode = .onDrag
-		
+	}
+	
+	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(animated)
+
+		let keyWindow = UIApplication.shared.connectedScenes
+			.filter ({$0.activationState == .foregroundActive})
+			.map ({$0 as? UIWindowScene})
+			.compactMap ({$0})
+			.first?.windows
+			.filter({$0.isKeyWindow}).first
+		let tabBarVC = keyWindow?.rootViewController as? MainTabBarController
+
+		tabBarVC?.trackDetailView.delegate = self
 	}
 	
 	func displayData(viewModel: Search.Model.ViewModel.ViewModelData) {
