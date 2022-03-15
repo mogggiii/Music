@@ -33,8 +33,9 @@ enum Search {
 
 class SearchViewModel: NSObject, NSCoding {
 	
-	@objc(_TtCC5Music15SearchViewModel4Cell)class Cell: NSObject, NSCoding {
+	@objc(_TtCC5Music15SearchViewModel4Cell)class Cell: NSObject, NSCoding, Identifiable {
 		
+		var id = UUID()
 		var iconUrlString: String?
 		var trackName: String
 		var collectionName: String?

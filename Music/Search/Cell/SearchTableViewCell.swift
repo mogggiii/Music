@@ -20,6 +20,7 @@ class SearchTableViewCell: UITableViewCell {
 	
 	var cell: SearchViewModel.Cell?
 	
+	// MARK: - UI Elements
 	var trackName: UILabel = {
 		let label = UILabel()
 		label.font = .systemFont(ofSize: 17)
@@ -60,15 +61,6 @@ class SearchTableViewCell: UITableViewCell {
 		return button
 	}()
 	
-	let test: UIButton = {
-		let button = UIButton()
-		button.setTitle("Show", for: .normal)
-		button.tintColor = .red
-		button.addTarget(self, action: #selector(fff), for: .touchUpInside)
-		button.translatesAutoresizingMaskIntoConstraints = false
-		return button
-	}()
-	
 	override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
 		super.init(style: style, reuseIdentifier: reuseIdentifier)
 		configureCell()
@@ -79,9 +71,22 @@ class SearchTableViewCell: UITableViewCell {
 		fatalError("init(coder:) has not been implemented")
 	}
 	
-	// MARK: - Set Cell via ViewModel 
+	// MARK: - Set Cell via ViewModel
 	func set(viewModel: SearchViewModel.Cell) {
+		
 		self.cell = viewModel
+		
+		let savedTracks = UserDefaults.standard.savedTracks()
+		let hasFavorite = savedTracks.firstIndex {
+			$0.trackName == self.cell?.trackName && $0.artistName == self.cell?.artistName
+		} != nil
+		
+		if hasFavorite {
+			addButton.isHidden = true
+		} else {
+			addButton.isHidden = false
+		}
+		
 		artistName.text = viewModel.artistName
 		trackName.text = viewModel.trackName
 		collectionName.text = viewModel.collectionName ?? ""
@@ -93,18 +98,15 @@ class SearchTableViewCell: UITableViewCell {
 	// MARK: - Save track (User Defaults)
 	@objc func addTrackAction() {
 		let defaults = UserDefaults.standard
-		if let savedData = try? NSKeyedArchiver.archivedData(withRootObject: cell, requiringSecureCoding: false) {
-			print("Succes")
-			defaults.set(savedData, forKey: "tracks")
-		}
-	}
+		guard let cell = cell else { return }
+		var listOfTracks = defaults.savedTracks()
+		addButton.isHidden = true
 	
-	@objc func fff() {
-		let defaults = UserDefaults.standard
-		if let savedTrack = defaults.object(forKey: "tracks") as? Data {
-			if let decodedTrack = try? NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(savedTrack) as? SearchViewModel.Cell {
-				print(decodedTrack.trackName)
-			}
+		listOfTracks.append(cell)
+		
+		if let savedData = try? NSKeyedArchiver.archivedData(withRootObject: listOfTracks, requiringSecureCoding: false) {
+			print("Succes")
+			defaults.set(savedData, forKey: UserDefaults.favoriteTrackKey)
 		}
 	}
 	
@@ -116,7 +118,6 @@ class SearchTableViewCell: UITableViewCell {
 		contentView.addSubview(collectionName)
 		contentView.addSubview(albumCover)
 		contentView.addSubview(addButton)
-		contentView.addSubview(test)
 		
 		NSLayoutConstraint.activate([
 			
@@ -143,9 +144,6 @@ class SearchTableViewCell: UITableViewCell {
 			addButton.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 34),
 			addButton.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -34),
 			addButton.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -24),
-			
-			test.centerXAnchor.constraint(equalTo: self.contentView.centerXAnchor),
-			test.centerYAnchor.constraint(equalTo: self.contentView.centerYAnchor)
 			
 		])
 	}

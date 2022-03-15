@@ -56,6 +56,9 @@ class SearchViewController: UITableViewController, SearchDisplayLogic {
 		
 		setupSearchBar()
 		setupTableView()
+		
+		tableView.keyboardDismissMode = .onDrag
+		
 	}
 	
 	func displayData(viewModel: Search.Model.ViewModel.ViewModelData) {

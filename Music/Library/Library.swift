@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct Library: View {
+	
+	var tracks = UserDefaults.standard.savedTracks()
+	
 	var body: some View {
 		NavigationView {
 			VStack {
@@ -33,12 +36,9 @@ struct Library: View {
 						}
 					}
 				}.padding().frame(height: 50)
-				
 				Divider().padding(.top)
-				List {
-					LibraryCell()
-					Text("First")
-					Text("First")
+				List(tracks) { track in
+					LibraryCell(cell: track)
 				} .listStyle(.plain)
 					.listRowSeparator(.hidden)
 
