@@ -9,7 +9,11 @@ import SwiftUI
 
 struct Library: View {
 	
-	var tracks = UserDefaults.standard.savedTracks()
+	@State var tracks = UserDefaults.standard.savedTracks()
+	@State var showingAlert = false
+	@State private var track: SearchViewModel.Cell!
+	
+	static var tabBarDelegate: MainTabBarControllerDelegate?
 	
 	var body: some View {
 		NavigationView {
@@ -17,7 +21,8 @@ struct Library: View {
 				GeometryReader { geometry in
 					HStack(spacing: 20) {
 						Button {
-							print("1234")
+							self.track = self.tracks[0]
+							Library.tabBarDelegate?.maximaizeTrackDetailController(viewModel: self.track)
 						} label: {
 							Image(systemName: "play.fill")
 								.frame(width: geometry.size.width / 2 - 10, height: 50)
@@ -26,7 +31,7 @@ struct Library: View {
 								.cornerRadius(10)
 						}
 						Button {
-							print("59090")
+							self.tracks = UserDefaults.standard.savedTracks()
 						} label: {
 							Image(systemName: "arrow.triangle.2.circlepath")
 								.frame(width: geometry.size.width / 2 - 10, height: 50)
@@ -37,16 +42,53 @@ struct Library: View {
 					}
 				}.padding().frame(height: 50)
 				Divider().padding(.top)
-				List(tracks) { track in
-					LibraryCell(cell: track)
+				
+				// MARK: - List of Tracks
+				List {
+					ForEach(tracks) { track in
+						LibraryCell(cell: track).gesture(
+							LongPressGesture()
+								.onEnded { _ in
+									print("Pressed")
+									self.track = track
+									self.showingAlert = true
+								}
+								.simultaneously(with: TapGesture().onEnded { _ in
+									self.track = track
+									Library.tabBarDelegate?.maximaizeTrackDetailController(viewModel: self.track)
+								}))
+					} .onDelete(perform: delete)
 				} .listStyle(.plain)
 					.listRowSeparator(.hidden)
-
-			}
-			
-			.navigationBarTitle("Library")
+				
+			}.actionSheet(isPresented: $showingAlert, content: {
+				ActionSheet( title: Text("Are you sure you want to delete this track?"), buttons: [.destructive(Text("Delete"), action: {
+					self.delete(track: self.track)
+				}), .cancel()])
+			})
+				.navigationBarTitle("Library")
 		}
 		
+	}
+	
+	// MARK: - Delete Functions
+	func delete(at offset: IndexSet) {
+		tracks.remove(atOffsets: offset)
+		if let savedData = try? NSKeyedArchiver.archivedData(withRootObject: tracks, requiringSecureCoding: false) {
+			let defaults = UserDefaults.standard
+			defaults.set(savedData, forKey: UserDefaults.favoriteTrackKey)
+		}
+	}
+	
+	func delete(track: SearchViewModel.Cell) {
+		let index = tracks.firstIndex(of: track)
+		guard let index = index else { return }
+		tracks.remove(at: index)
+		
+		if let savedData = try? NSKeyedArchiver.archivedData(withRootObject: tracks, requiringSecureCoding: false) {
+			let defaults = UserDefaults.standard
+			defaults.set(savedData, forKey: UserDefaults.favoriteTrackKey)
+		}
 	}
 }
 

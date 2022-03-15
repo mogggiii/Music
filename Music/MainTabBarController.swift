@@ -40,6 +40,7 @@ class MainTabBarController: UITabBarController {
 		]
 		
 		SearchViewController.tabBarDelegate = self
+		Library.tabBarDelegate = self
 		
 		setupTrackDetailView()
 	}

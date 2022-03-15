@@ -22,6 +22,7 @@ struct LibraryCell: View {
 			
 			VStack(alignment: .leading) {
 				Text(cell.trackName)
+				Spacer()
 				Text(cell.artistName)
 			}
 		}
